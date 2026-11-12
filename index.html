@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Машинка с анимацией</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Пейзаж */
+    body {
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      background:
+        /* Солнце */
+        radial-gradient(circle at 85% 18%, #ffeb3b 0 40px, rgba(255, 235, 59, 0.3) 41px 55px, transparent 56px),
+        /* Облака */
+        radial-gradient(ellipse 60px 25px at 20% 20%, #ffffff 98%, transparent),
+        radial-gradient(ellipse 45px 20px at 23% 18%, #ffffff 98%, transparent),
+        radial-gradient(ellipse 70px 25px at 55% 15%, #ffffff 98%, transparent),
+        /* Пунктирная разметка на дороге */
+        repeating-linear-gradient(
+          90deg,
+          #ffffff 0 40px,
+          transparent 40px 80px
+        ) 0 calc(100% - 48px) / 100% 6px no-repeat,
+        /* Асфальт */
+        linear-gradient(to top, #37474f 0 100px, transparent 100px),
+        /* Трава / обочина */
+        linear-gradient(to top, #4caf50 0 130px, transparent 130px),
+        /* Небо */
+        linear-gradient(to bottom, #4fc3f7, #e1f5fe);
+    }
+
+    /* Дерево на заднем плане */
+    body::before {
+      content: "";
+      position: absolute;
+      bottom: 130px;
+      left: 15%;
+      width: 16px;
+      height: 50px;
+      background: #6d4c41;
+      box-shadow: 
+        0 -45px 0 22px #2e7d32,
+        -20px -30px 0 16px #388e3c,
+        20px -30px 0 16px #1b5e20;
+    }
+
+    /* МАШИНКА */
+    .car {
+      position: absolute;
+      bottom: 75px;
+      width: 200px;
+      height: 42px;
+      background: linear-gradient(to bottom, #e53935 0%, #b71c1c 100%);
+      border-radius: 16px 35px 8px 8px;
+      box-shadow: 
+        inset 0 -5px 0 rgba(0, 0, 0, 0.2),
+        0 12px 10px -6px rgba(0, 0, 0, 0.6);
+      
+      animation: driveIn 3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Кабина и стёкла */
+    .car::before {
+      content: "";
+      position: absolute;
+      top: -28px;
+      left: 32px;
+      width: 112px;
+      height: 30px;
+      background: #e53935;
+      border-radius: 22px 32px 0 0;
+      background-image: 
+        linear-gradient(to right, 
+          transparent 8px, 
+          #b3e5fc 8px 50px, 
+          #e53935 50px 58px, 
+          #b3e5fc 58px 98px, 
+          transparent 98px
+        );
+      background-size: 100% 20px;
+      background-position: 0 6px;
+      background-repeat: no-repeat;
+    }
+
+    /* Оба колеса с дисками + передняя и задняя фары */
+    .car::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      bottom: -18px;
+      background:
+        /* Передняя фара */
+        radial-gradient(circle 6px at 195px 24px, #fff59d 90%, transparent),
+        /* Луч света от фары */
+        radial-gradient(ellipse 35px 10px at 225px 24px, rgba(255, 245, 157, 0.6), transparent),
+        /* Задний стоп-сигнал */
+        radial-gradient(circle 5px at 4px 20px, #ff5252 90%, transparent),
+        /* Левое колесо */
+        radial-gradient(circle at 44px 42px, #546e7a 0 4px, #cfd8dc 4px 10px, #212121 10px 17px, #263238 17px 20px, transparent 20px),
+        /* Правое колесо */
+        radial-gradient(circle at 156px 42px, #546e7a 0 4px, #cfd8dc 4px 10px, #212121 10px 17px, #263238 17px 20px, transparent 20px);
+    }
+
+    /* Анимация выезда и остановки */
+    @keyframes driveIn {
+      0% {
+        left: -200px;
+      }
+      100% {
+        left: calc(100vw - 250px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="car"></div>
+
+</body>
+</html>
